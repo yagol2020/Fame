@@ -2,7 +2,13 @@ package com.zbw.fame.model.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.data.annotation.CreatedBy;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.util.Date;
 
 /**
@@ -11,6 +17,8 @@ import java.util.Date;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
 public class User extends BaseEntity {
 
     /**
@@ -36,5 +44,5 @@ public class User extends BaseEntity {
     /**
      * 最后登陆时间
      */
-    private Date logged;
+    private Date logged = new Date();
 }

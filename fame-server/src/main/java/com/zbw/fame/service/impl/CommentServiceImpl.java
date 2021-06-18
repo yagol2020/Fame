@@ -96,8 +96,8 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     }
 
     @Override
-    public CommentDto getCommentDto(Integer id) {
-
+    public CommentDto getCommentDto(Integer id) throws InterruptedException {
+        Thread.sleep(10);
         Comment entity = getById(id);
         if (null == entity) {
             throw new NotFoundException(Comment.class);

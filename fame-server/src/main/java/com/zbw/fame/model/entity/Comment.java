@@ -3,12 +3,16 @@ package com.zbw.fame.model.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
 /**
  * @author by zzzzbw
  * @since 2021/3/8 21:47
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Entity
 public class Comment extends BaseEntity {
 
     /**
@@ -44,12 +48,12 @@ public class Comment extends BaseEntity {
     /**
      * 赞
      */
-    private Integer agree;
+    private Integer agree = 0;
 
     /**
      * 踩
      */
-    private Integer disagree;
+    private Integer disagree = 0;
 
     /**
      * 评论ip

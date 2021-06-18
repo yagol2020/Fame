@@ -4,12 +4,16 @@ import com.zbw.fame.model.enums.LogType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
 /**
  * @author by zzzzbw
  * @since 2021/03/08 15:21
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Entity
 public class SysLog extends BaseEntity {
 
     /**
@@ -25,6 +29,7 @@ public class SysLog extends BaseEntity {
     /**
      * 操作类型
      */
+    @Column(columnDefinition = "varchar(32)")
     private LogType logType;
 
     /**

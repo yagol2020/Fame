@@ -40,7 +40,7 @@ public class CommentServiceTest extends BaseTest {
     }
 
     @Test
-    public void test3() {
+    public void test3() throws InterruptedException {
         log.info("{}", commentService.getCommentDto(2));
     }
 

@@ -1,5 +1,10 @@
 package com.zbw.fame.model.enums;
 
+import lombok.Data;
+
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
 /**
  * 文章状态
  *

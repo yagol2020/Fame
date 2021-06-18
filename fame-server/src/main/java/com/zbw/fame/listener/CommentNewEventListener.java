@@ -27,7 +27,7 @@ public class CommentNewEventListener {
 
     @Async
     @EventListener
-    public void onCommentNewEvent(CommentNewEvent event) {
+    public void onCommentNewEvent(CommentNewEvent event) throws InterruptedException {
         log.info("onCommentNewEvent event:{}", event);
 
         //发送邮件提醒

@@ -49,7 +49,7 @@ public interface CommentService extends IService<com.zbw.fame.model.entity.Comme
      * @param id 评论id
      * @return CommentDto
      */
-    CommentDto getCommentDto(Integer id);
+    CommentDto getCommentDto(Integer id) throws InterruptedException;
 
     /**
      * 删除评论

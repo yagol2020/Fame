@@ -48,7 +48,7 @@ public class CommentController {
      * @return {@see CommentDto}
      */
     @GetMapping("{id}")
-    public RestResponse<Comment> detail(@PathVariable Integer id) {
+    public RestResponse<Comment> detail(@PathVariable Integer id) throws InterruptedException {
         CommentDto comment = commentService.getCommentDto(id);
         if (null != comment.getParentComment()) {
             comment.getParentComment().setContent(FameUtils.mdToHtml(comment.getParentComment().getContent()));
