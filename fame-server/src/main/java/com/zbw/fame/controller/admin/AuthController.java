@@ -56,7 +56,7 @@ public class AuthController {
      *
      * @return {@link RestResponse#ok()}
      */
-    @PutMapping("reset/password")
+    @PostMapping("reset/password")
     public RestResponse<RestResponse.Empty> resetPassword(@RequestBody @Valid ResetPasswordParam param) {
         LoginUser user = FameUtils.getLoginUser();
         userService.resetPassword(user.getId(), param);
@@ -69,7 +69,7 @@ public class AuthController {
      *
      * @return {@link RestResponse#ok()}
      */
-    @PutMapping("reset/user")
+    @PostMapping("reset/user")
     public RestResponse<RestResponse.Empty> resetUser(@RequestBody @Valid ResetUserParam param) {
         LoginUser user = FameUtils.getLoginUser();
         userService.resetUser(user.getId(), param);

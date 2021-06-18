@@ -302,7 +302,7 @@ export default {
                     const message = data.msg || '保存失败,未更新数据库'
                     this.$util.message.error(message)
                 }
-                this.$router.push('/admin/login')
+                this.$router.push('/login')
             })
         },
         submitPassword() {
@@ -313,7 +313,7 @@ export default {
                     const message = data.msg || '保存失败,未更新数据库'
                     this.$util.message.error(message)
                 }
-                this.$router.push('/admin/login')
+                this.$router.push('/login')
             })
         },
         submitOptions() {
