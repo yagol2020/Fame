@@ -10,7 +10,7 @@ import com.zbw.fame.listener.event.LogEvent;
 import com.zbw.fame.mapper.CommentMapper;
 import com.zbw.fame.model.dto.CommentDto;
 import com.zbw.fame.model.entity.Article;
-import com.zbw.fame.model.entity.BaseEntity;
+import com.zbw.fame.model.entity.BaseBlogEntity;
 import com.zbw.fame.model.entity.Comment;
 import com.zbw.fame.model.enums.CommentAssessType;
 import com.zbw.fame.model.enums.LogAction;
@@ -147,7 +147,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         List<Comment> list = lambdaQuery()
                 .eq(Comment::getArticleId, articleId)
                 .list();
-        Set<Integer> ids = list.stream().map(BaseEntity::getId).collect(Collectors.toSet());
+        Set<Integer> ids = list.stream().map(BaseBlogEntity::getId).collect(Collectors.toSet());
         if (CollectionUtils.isEmpty(ids)) {
             return 0;
         }
@@ -199,7 +199,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
 
         List<Comment> comments = lambdaQuery()
-                .select(BaseEntity::getId)
+                .select(BaseBlogEntity::getId)
                 .select(Comment::getArticleId)
                 .in(Comment::getArticleId, articleIds)
                 .list();

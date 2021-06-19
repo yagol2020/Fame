@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class Media extends BaseEntity {
+public class Media extends BaseBlogEntity {
 
     /**
      * 文件名

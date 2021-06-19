@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zbw.fame.mapper.ArticleTagMapper;
 import com.zbw.fame.model.entity.Article;
 import com.zbw.fame.model.entity.ArticleTag;
-import com.zbw.fame.model.entity.BaseEntity;
+import com.zbw.fame.model.entity.BaseBlogEntity;
 import com.zbw.fame.model.entity.Tag;
 import com.zbw.fame.service.ArticleService;
 import com.zbw.fame.service.ArticleTagService;
@@ -77,7 +77,7 @@ public class ArticleTagServiceImpl extends ServiceImpl<ArticleTagMapper, Article
 
         Map<Integer, Article> articleMap = articleService.listByIds(articleIds, isFront)
                 .stream()
-                .collect(Collectors.toMap(BaseEntity::getId, article -> article, (o1, o2) -> o1));
+                .collect(Collectors.toMap(BaseBlogEntity::getId, article -> article, (o1, o2) -> o1));
 
         return articleTags
                 .stream()
@@ -109,7 +109,7 @@ public class ArticleTagServiceImpl extends ServiceImpl<ArticleTagMapper, Article
 
         Map<Integer, Tag> tagMap = tagService.listByIds(tagIds)
                 .stream()
-                .collect(Collectors.toMap(BaseEntity::getId, o -> o));
+                .collect(Collectors.toMap(BaseBlogEntity::getId, o -> o));
 
         return articleTags
                 .stream()

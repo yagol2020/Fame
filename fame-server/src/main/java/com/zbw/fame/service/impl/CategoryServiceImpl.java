@@ -6,7 +6,7 @@ import com.zbw.fame.mapper.CategoryMapper;
 import com.zbw.fame.model.dto.ArticleInfoDto;
 import com.zbw.fame.model.dto.CategoryInfoDto;
 import com.zbw.fame.model.entity.Article;
-import com.zbw.fame.model.entity.BaseEntity;
+import com.zbw.fame.model.entity.BaseBlogEntity;
 import com.zbw.fame.model.entity.Category;
 import com.zbw.fame.model.param.SaveCategoryParam;
 import com.zbw.fame.service.ArticleCategoryService;
@@ -73,7 +73,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
         Set<Integer> categoryIds = categories
                 .stream()
-                .map(BaseEntity::getId)
+                .map(BaseBlogEntity::getId)
                 .collect(Collectors.toSet());
 
         Map<Integer, List<Article>> articleMap = articleCategoryService.listArticleByCategoryIds(categoryIds, isFront);

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zbw.fame.mapper.ArticleCategoryMapper;
 import com.zbw.fame.model.entity.Article;
 import com.zbw.fame.model.entity.ArticleCategory;
-import com.zbw.fame.model.entity.BaseEntity;
+import com.zbw.fame.model.entity.BaseBlogEntity;
 import com.zbw.fame.model.entity.Category;
 import com.zbw.fame.service.ArticleCategoryService;
 import com.zbw.fame.service.ArticleService;
@@ -74,7 +74,7 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
 
         Map<Integer, Article> articleMap = articleService.listByIds(articleIds, isFront)
                 .stream()
-                .collect(Collectors.toMap(BaseEntity::getId, article -> article, (o1, o2) -> o1));
+                .collect(Collectors.toMap(BaseBlogEntity::getId, article -> article, (o1, o2) -> o1));
 
         return articleCategories
                 .stream()
@@ -105,7 +105,7 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
 
         Map<Integer, Category> categoryMap = categoryService.listByIds(categoryIds)
                 .stream()
-                .collect(Collectors.toMap(BaseEntity::getId, o -> o));
+                .collect(Collectors.toMap(BaseBlogEntity::getId, o -> o));
 
         Map<Integer, Category> map = new HashMap<>();
         for (ArticleCategory o : articleCategories) {

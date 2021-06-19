@@ -3,7 +3,6 @@ package com.zbw.fame.model.entity;
 import com.zbw.fame.model.enums.ArticleStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 
@@ -15,7 +14,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @org.hibernate.annotations.Table(appliesTo = "article", comment = "文章表")
-public class Article extends BaseEntity {
+public class Article extends BaseBlogEntity {
 
     /**
      * 内容标题

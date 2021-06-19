@@ -2,7 +2,7 @@ package com.zbw.fame.listener;
 
 import com.zbw.fame.exception.TipException;
 import com.zbw.fame.listener.event.LogEvent;
-import com.zbw.fame.model.entity.BaseEntity;
+import com.zbw.fame.model.entity.BaseBlogEntity;
 import com.zbw.fame.model.entity.SysLog;
 import com.zbw.fame.model.enums.LogAction;
 import com.zbw.fame.service.SysLogService;
@@ -67,11 +67,11 @@ public class LogEventListener {
             }
             // 获取集合中的数据类型
             Object next = ((Collection<?>) data).iterator().next();
-            if (next instanceof BaseEntity) {
+            if (next instanceof BaseBlogEntity) {
                 // 数据为拼接id字符串
                 @SuppressWarnings("unchecked")
-                Collection<? extends BaseEntity> list = (Collection<? extends BaseEntity>) data;
-                return "ids:" + list.stream().map(BaseEntity::getId).map(String::valueOf).collect(Collectors.joining(","));
+                Collection<? extends BaseBlogEntity> list = (Collection<? extends BaseBlogEntity>) data;
+                return "ids:" + list.stream().map(BaseBlogEntity::getId).map(String::valueOf).collect(Collectors.joining(","));
             }
         }
 

@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class ArticleCategory extends BaseEntity {
+public class ArticleCategory extends BaseBlogEntity {
     /**
      * 文章id
      */

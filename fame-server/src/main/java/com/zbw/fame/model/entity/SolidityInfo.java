@@ -19,9 +19,7 @@ import java.util.Optional;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-public class SolidityInfo extends AbstractPersistable<Long> {
-
-
+public class SolidityInfo extends BaseEntity {
     private String address;
     private String contractName;
 }

@@ -15,7 +15,7 @@ import com.zbw.fame.model.dto.ArticleDetailDto;
 import com.zbw.fame.model.dto.ArticleInfoDto;
 import com.zbw.fame.model.dto.LoginUser;
 import com.zbw.fame.model.entity.Article;
-import com.zbw.fame.model.entity.BaseEntity;
+import com.zbw.fame.model.entity.BaseBlogEntity;
 import com.zbw.fame.model.entity.Category;
 import com.zbw.fame.model.entity.Tag;
 import com.zbw.fame.model.enums.ArticleStatus;
@@ -76,7 +76,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Override
     public ArticleDetailDto getArticleFront(Integer id) {
         Article article = lambdaQuery()
-                .eq(BaseEntity::getId, id)
+                .eq(BaseBlogEntity::getId, id)
                 .eq(Article::getStatus, ArticleStatus.PUBLISH)
                 .one();
 
@@ -178,7 +178,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public List<ArchiveDto> getArchives() {
         List<Article> articles = lambdaQuery()
                 .eq(Article::getStatus, ArticleStatus.PUBLISH)
-                .orderByDesc(BaseEntity::getCreated)
+                .orderByDesc(BaseBlogEntity::getCreatedTime)
                 .list();
 
         Map<Integer, List<ArticleInfoDto>> groupByYear = articles.stream()
@@ -217,7 +217,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         return lambdaQuery()
                 .select()
                 .eq(isFront, Article::getStatus, ArticleStatus.PUBLISH)
-                .in(BaseEntity::getId, ids)
+                .in(BaseBlogEntity::getId, ids)
                 .list();
     }
 
@@ -249,7 +249,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
      * @return
      */
     private IPage<ArticleDetailDto> batchConvertToDetailDto(IPage<Article> articles) {
-        Set<Integer> articleIds = articles.getRecords().stream().map(BaseEntity::getId).collect(Collectors.toSet());
+        Set<Integer> articleIds = articles.getRecords().stream().map(BaseBlogEntity::getId).collect(Collectors.toSet());
 
         Map<Integer, Category> categoryMap = articleCategoryService.listCategoryByArticleIds(articleIds);
         Map<Integer, List<Tag>> tagMap = articleTagService.listTagByArticleIds(articleIds);

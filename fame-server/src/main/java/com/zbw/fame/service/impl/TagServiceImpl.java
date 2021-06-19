@@ -1,15 +1,12 @@
 package com.zbw.fame.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zbw.fame.exception.TipException;
 import com.zbw.fame.mapper.TagMapper;
 import com.zbw.fame.model.dto.ArticleInfoDto;
 import com.zbw.fame.model.dto.TagInfoDto;
 import com.zbw.fame.model.entity.Article;
-import com.zbw.fame.model.entity.ArticleTag;
-import com.zbw.fame.model.entity.BaseEntity;
+import com.zbw.fame.model.entity.BaseBlogEntity;
 import com.zbw.fame.model.entity.Tag;
 import com.zbw.fame.model.param.SaveTagParam;
 import com.zbw.fame.service.ArticleTagService;
@@ -62,7 +59,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         }
         Set<Integer> tagIds = tags
                 .stream()
-                .map(BaseEntity::getId)
+                .map(BaseBlogEntity::getId)
                 .collect(Collectors.toSet());
         Map<Integer, List<Article>> articleMap = articleTagService.listArticleByTagIds(tagIds, isFront);
 

@@ -19,7 +19,7 @@ public class ArticleInfoDto {
         super();
         this.id = article.getId();
         this.title = article.getTitle();
-        this.created = article.getCreated();
+        this.created = article.getCreatedTime();
     }
 
 

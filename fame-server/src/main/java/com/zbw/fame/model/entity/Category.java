@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class Category extends BaseEntity {
+public class Category extends BaseBlogEntity {
 
     private Integer parentId;
 

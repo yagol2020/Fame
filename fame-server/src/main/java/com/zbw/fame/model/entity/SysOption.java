@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class SysOption extends BaseEntity {
+public class SysOption extends BaseBlogEntity {
 
     /**
      * 设置key

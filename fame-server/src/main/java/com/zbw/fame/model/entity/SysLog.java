@@ -14,7 +14,7 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class SysLog extends BaseEntity {
+public class SysLog extends BaseBlogEntity {
 
     /**
      * 操作数据
