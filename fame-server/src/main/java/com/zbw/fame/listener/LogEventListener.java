@@ -27,16 +27,12 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class LogEventListener {
-
-
     private final SysLogService sysLogService;
-
 
     @Async
     @EventListener
     public void onLogEvent(LogEvent event) {
         log.info("onLogEvent event:{}", event);
-
         SysLog sysLog = createLog(event);
         sysLogService.save(sysLog);
     }

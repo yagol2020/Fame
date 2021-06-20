@@ -3,6 +3,7 @@ package com.zbw.fame.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zbw.fame.aop.SystemLogAno;
 import com.zbw.fame.model.dto.*;
 import com.zbw.fame.model.entity.Comment;
 import com.zbw.fame.model.enums.CommentAssessType;
@@ -48,6 +49,7 @@ public class FrontController {
      * @param limit 每页数量
      * @return {@see Pagination<ArticleDetailDto>}
      */
+    @SystemLogAno(description = "文章列表")
     @GetMapping("article")
     public RestResponse<Pagination<ArticleDetailDto>> home(@RequestParam(required = false, defaultValue = FameConst.DEFAULT_PAGE) Integer page,
                                                            @RequestParam(required = false, defaultValue = FameConst.PAGE_SIZE) Integer limit,
@@ -62,6 +64,7 @@ public class FrontController {
      * @param id 文章id
      * @return {@see ArticleDetailDto}
      */
+    @SystemLogAno(description = "文章内容详情")
     @GetMapping("article/{id}")
     public RestResponse<ArticleDetailDto> post(@PathVariable Integer id) {
         ArticleDetailDto articleDetailDto = articleService.getArticleFront(id);
@@ -75,6 +78,7 @@ public class FrontController {
      *
      * @return {@see List<TagInfoDto>}
      */
+    @SystemLogAno(description = "标签页")
     @GetMapping("tag")
     public RestResponse<List<TagInfoDto>> tag() {
         List<TagInfoDto> tagInfos = tagService.listTagInfo(true);
@@ -86,6 +90,7 @@ public class FrontController {
      *
      * @return {@see List<CategoryInfoDto>}
      */
+    @SystemLogAno(description = "分类页")
     @GetMapping("category")
     public RestResponse<List<CategoryInfoDto>> category() {
         List<CategoryInfoDto> categoryInfos = categoryService.listCategoryInfo(true);
@@ -97,6 +102,7 @@ public class FrontController {
      *
      * @return {@see List<ArchiveDto>}
      */
+    @SystemLogAno(description = "归档页")
     @GetMapping("archive")
     public RestResponse<List<ArchiveDto>> archive() {
         List<ArchiveDto> archives = articleService.getArchives();
@@ -108,6 +114,7 @@ public class FrontController {
      *
      * @return {@see List<ArticleInfoDto>}
      */
+    @SystemLogAno(description = "导航栏文章列表")
     @GetMapping("header")
     public RestResponse<List<ArticleInfoDto>> headerList() {
         List<ArticleInfoDto> articleHeader = articleService.listArticleHeader();
@@ -122,6 +129,7 @@ public class FrontController {
      * @param limit     每页数量
      * @return {@see Pagination<Comment>}
      */
+    @SystemLogAno(description = "获取文章的评论")
     @GetMapping("comment")
     public RestResponse<Pagination<Comment>> getArticleComment(@RequestParam Integer articleId, @RequestParam(required = false, defaultValue = "0") Integer page,
                                                                @RequestParam(required = false, defaultValue = FameConst.PAGE_SIZE) Integer limit) {
@@ -141,7 +149,7 @@ public class FrontController {
         commentService.createComment(comment);
         return RestResponse.ok();
     }
-    
+
     /**
      * 顶评论
      *
@@ -169,7 +177,7 @@ public class FrontController {
     /**
      * 获取前端的设置
      *
-     * @return Map
+     * @return Map {@link RestResponse#ok()}
      */
     @GetMapping("option")
     public RestResponse<Map<String, String>> getOption() {

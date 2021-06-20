@@ -1,19 +1,18 @@
-package com.zbw.fame.aspect;
+package com.zbw.fame.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import java.lang.annotation.*;
 
 /**
  * @author yagol
  * @TIME 2021/6/19 - 11:40 下午
  * @Description
  **/
-@Aspect
-@Component
-@Slf4j
-
-public class SystemLogAspect {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface SystemLogAno {
+    String description() default "";
 }
