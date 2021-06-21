@@ -83,7 +83,6 @@ public class InitApplicationRunner implements ApplicationRunner {
         // 任意访问一个url，使DispatcherServlet和数据库连接初始化
         String url = "http://" + FameUtils.getHostAddress() + ":" + port + INIT_URL;
         log.info("The url for init: {}", url);
-
         try {
             new RestTemplate().getForObject(url, String.class);
         } catch (Exception e) {
