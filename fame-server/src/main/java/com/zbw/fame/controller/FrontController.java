@@ -143,6 +143,7 @@ public class FrontController {
      *
      * @return {@link RestResponse#ok()}
      */
+    @SystemLogAno(description = "发表评论")
     @PostMapping("comment")
     public RestResponse<RestResponse.Empty> addComment(@RequestBody @Valid AddCommentParam param) {
         Comment comment = FameUtils.convertTo(param, Comment.class);
@@ -156,6 +157,7 @@ public class FrontController {
      * @param commentId 评论id
      * @return {@link RestResponse#ok()}
      */
+    @SystemLogAno(description = "顶评论")
     @PostMapping("comment/agree/{commentId}")
     public RestResponse<RestResponse.Empty> agreeComment(@PathVariable Integer commentId) {
         commentService.assessComment(commentId, CommentAssessType.AGREE);
@@ -168,6 +170,7 @@ public class FrontController {
      * @param commentId 评论id
      * @return {@link RestResponse#ok()}
      */
+    @SystemLogAno(description = "踩评论")
     @PostMapping("comment/disagree/{commentId}")
     public RestResponse<RestResponse.Empty> disagreeComment(@PathVariable Integer commentId) {
         commentService.assessComment(commentId, CommentAssessType.DISAGREE);
@@ -179,6 +182,7 @@ public class FrontController {
      *
      * @return Map {@link RestResponse#ok()}
      */
+    @SystemLogAno(description = "获取前端的设置")
     @GetMapping("option")
     public RestResponse<Map<String, String>> getOption() {
         Map<String, String> map = sysOptionService.getFrontOptionMap();

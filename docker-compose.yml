@@ -1,4 +1,4 @@
-version: '3'
+version: '4'
 services:
   fame-nginx:
     container_name: fame-nginx
@@ -25,7 +25,7 @@ services:
     command: --lower-case-table-names=1
     environment:
       MYSQL_DATABASE: fame
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: MYSQLPASSWD@1234!
       MYSQL_ROOT_HOST: '%'
       TZ: Asia/Shanghai
     expose:
