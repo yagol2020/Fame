@@ -1,8 +1,6 @@
-#端口号
 server:
   port: 9090
 spring:
-  #mail
   mail:
     properties:
       mail:
@@ -11,7 +9,12 @@ spring:
           starttls:
             enable: true
             required: true
-  #默认properties
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://fame-mysql:3306/fame?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+    username: root
+    password: MYSQLPASSWD@1234!
   profiles:
     active: dev
   jackson:
@@ -22,6 +25,14 @@ spring:
       enabled: true
       max-file-size: 10MB
       max-request-size: 50MB
-
-
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+logging:
+  level:
+    root: INFO
+    #指定这个包下面的文件的log等级，比如com.zbw.*
+    com:
+      zbw: INFO
 

@@ -92,7 +92,7 @@
               <div class="comment-item-header">
                 <a class="user-name">{{ comment.name }}</a>
                 <span class="comment-date">{{
-                  comment.created | time('yyyy.MM.dd hh:mm')
+                  comment.createdTime | time('yyyy.MM.dd hh:mm')
                 }}</span>
               </div>
               <div v-highlight class="comment-item-content markdown-body">
