@@ -19,6 +19,7 @@ public class SysLog extends BaseBlogEntity {
     /**
      * 操作数据
      */
+    @Column(columnDefinition = "text")
     private String data;
 
     /**
