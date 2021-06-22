@@ -24,6 +24,7 @@ public class Article extends BaseBlogEntity {
     /**
      * 内容
      */
+    @Column(columnDefinition = "text")
     private String content;
 
     /**
