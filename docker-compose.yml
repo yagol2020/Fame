@@ -49,7 +49,7 @@ services:
     - ~/.fame/upload:/root/.fame/upload
     expose:
     - "9090"
-    command: mvn clean spring-boot:run -Dspring-boot.run.profiles=dev -Dmaven.test.skip=true
+    command: mvn clean spring-boot:run -Dmaven.test.skip=true
     depends_on:
     - fame-mysql
     restart: always
