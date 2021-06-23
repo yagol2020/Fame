@@ -1,6 +1,7 @@
 package com.zbw.fame.config;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.zbw.fame.config.init.InitArticle;
 import com.zbw.fame.model.entity.*;
 import com.zbw.fame.model.enums.ArticleStatus;
 import com.zbw.fame.model.enums.LogType;
@@ -19,6 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+import java.util.List;
+
 /**
  * springboot初始化完成后执行的动作
  *
@@ -29,7 +33,7 @@ import org.springframework.web.client.RestTemplate;
 @Component
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class InitApplicationRunner implements ApplicationRunner {
-
+    private final InitArticle initArticle;
     private final UserService userService;
 
     private final ArticleService articleService;
@@ -59,6 +63,7 @@ public class InitApplicationRunner implements ApplicationRunner {
 
     @Value("${server.port}")
     private String port;
+
 
     @Transactional(rollbackFor = Throwable.class)
     @Override
@@ -90,7 +95,7 @@ public class InitApplicationRunner implements ApplicationRunner {
         }
     }
 
-    private void createDefaultIfAbsent() {
+    private void createDefaultIfAbsent() throws IOException {
         log.info("Start create default data...");
         User user = createDefaultUserIfAbsent();
         Article article = createDefaultArticleIfAbsent(user);
@@ -106,12 +111,11 @@ public class InitApplicationRunner implements ApplicationRunner {
 
     private User createDefaultUserIfAbsent() {
         log.info("Create default user...");
-
         if (userService.count() > 0) {
             return null;
         }
         User user = new User();
-        user.setUsername("fame");
+        user.setUsername("yagol");
         user.setPasswordMd5("3e6693e83d186225b85b09e71c974d2d");
         user.setEmail("");
         user.setScreenName("admin");
@@ -119,7 +123,7 @@ public class InitApplicationRunner implements ApplicationRunner {
         return user;
     }
 
-    private Article createDefaultArticleIfAbsent(User user) {
+    private Article createDefaultArticleIfAbsent(User user) throws IOException {
         log.info("Create default post...");
         long count = articleService.count(Wrappers.<Article>lambdaQuery().eq(Article::isHeaderShow, false));
         if (null == user || count > 0) {
@@ -130,7 +134,7 @@ public class InitApplicationRunner implements ApplicationRunner {
         article.setContent("欢迎使用[Fame](https://github.com/zzzzbw/Fame)! 这是你的第一篇博客。快点来写点什么吧\n" +
                 "```java\n" +
                 "public static void main(String[] args){\n" +
-                "    System.out.println(\"Hello world\");\n" +
+                "    System.out.println(\"Hello Fame\");\n" +
                 "}\n" +
                 "```\n" +
                 "> 想要了解更多详细信息，可以查看[文档](https://github.com/zzzzbw/Fame/blob/master/README.md)。");
@@ -138,8 +142,9 @@ public class InitApplicationRunner implements ApplicationRunner {
         article.setListShow(true);
         article.setStatus(ArticleStatus.PUBLISH);
         article.setAuthorId(user.getId());
-
         articleService.save(article);
+        List<Article> initArticles = initArticle.initArticle(user);
+        initArticles.forEach(articleService::save);
         return article;
     }
 

@@ -3,6 +3,9 @@ package com.zbw.fame.util;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Enumeration;
 
 /**
@@ -19,4 +22,13 @@ public class YagolUtils {
         }
         return headerValues;
     }
+
+    public static String readFile2Str(File toBeReadFile) throws IOException {
+        byte[] bytes = new byte[(int) toBeReadFile.length()];
+        FileInputStream fileInputStream = new FileInputStream(toBeReadFile);
+        int ret = fileInputStream.read(bytes);
+        String content = new String(bytes, 0, ret);
+        return content;
+    }
+
 }
