@@ -1,14 +1,19 @@
 package com.zbw.fame.config.init;
 
+import com.sun.org.apache.xml.internal.security.Init;
+import com.zbw.fame.config.YagolProperties;
 import com.zbw.fame.model.entity.Article;
 import com.zbw.fame.model.entity.User;
 import com.zbw.fame.model.enums.ArticleStatus;
 import com.zbw.fame.util.YagolUtils;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -19,16 +24,14 @@ import java.util.Objects;
  * @Description
  **/
 @Component
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class InitArticle {
-    @Value("${yagol.init.contentPath}")
-    String contentPath;
-    @Value("${yagol.folderName}")
-    String folderName;
-    static String RESOURCES_PATH = "src/main/resources/".replace('/', File.separatorChar);
+
+    final YagolProperties.Init yagolInit;
 
     public List<Article> initArticle(User user) throws IOException {
-        File articleDir = new File(new File(folderName + File.separatorChar + RESOURCES_PATH + contentPath)
-                .getCanonicalPath());
+        File articleDir = new File(Objects.requireNonNull(getClass().getResource("/")).getPath()
+                + yagolInit.getContentPath());
         List<Article> articles = new LinkedList<>();
         for (File articleFile : Objects.requireNonNull(articleDir.listFiles())) {
             Article article = new Article();
