@@ -36,3 +36,7 @@ logging:
     com:
       zbw: INFO
 
+yagol:
+  folderName: fame-server
+  init:
+    contentPath: article-markdown
