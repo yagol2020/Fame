@@ -1,6 +1,5 @@
 package com.zbw.fame.config.init;
 
-import com.sun.org.apache.xml.internal.security.Init;
 import com.zbw.fame.config.YagolProperties;
 import com.zbw.fame.model.entity.Article;
 import com.zbw.fame.model.entity.User;
