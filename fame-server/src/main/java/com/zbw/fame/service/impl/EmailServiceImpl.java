@@ -115,7 +115,7 @@ public class EmailServiceImpl implements EmailService {
      * @return {@see Context}
      */
     private Map<String, String> getEmailParams(Comment comment) {
-        Map<String, String> params = new HashMap<>();
+        Map<String, String> params = new HashMap<>(16);
 
         String websiteName = sysOptionService.get(OptionKeys.BLOG_NAME);
         String website = sysOptionService.get(OptionKeys.BLOG_WEBSITE);

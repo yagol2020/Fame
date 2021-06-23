@@ -34,6 +34,9 @@ import java.util.Objects;
 @RequiredArgsConstructor(onConstructor_ = {@Autowired, @Lazy})
 public class MediaServiceImpl extends ServiceImpl<MediaMapper, Media> implements MediaService {
 
+    static int MAX_FILE_NAME_LENGTH = 255;
+    static String IMAGE_TYPE_NAME = "image";
+
     @Override
     public Page<Media> pageAdminMedias(Integer current, Integer size) {
         Page<Media> page = new Page<>(current, size);
@@ -59,7 +62,7 @@ public class MediaServiceImpl extends ServiceImpl<MediaMapper, Media> implements
         if (ObjectUtils.isEmpty(name)) {
             throw new TipException("文件名不能为空");
         }
-        if (name.length() > 255) {
+        if (name.length() > MAX_FILE_NAME_LENGTH) {
             throw new TipException("文件名过长");
         }
 
@@ -85,7 +88,7 @@ public class MediaServiceImpl extends ServiceImpl<MediaMapper, Media> implements
             file.transferTo(mediaPath.toFile());
 
             // 图片资源压缩图片
-            if (Objects.requireNonNull(file.getContentType()).contains("image")) {
+            if (Objects.requireNonNull(file.getContentType()).contains(IMAGE_TYPE_NAME)) {
                 String thumbnailName = name.endsWith(suffix) ?
                         FameUtils.getFileBaseName(name) + FameConst.MEDIA_THUMBNAIL_SUFFIX + "." + suffix
                         : name + FameConst.MEDIA_THUMBNAIL_SUFFIX + "." + suffix;

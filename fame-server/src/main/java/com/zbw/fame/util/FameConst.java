@@ -106,6 +106,11 @@ public interface FameConst {
                 "</html>";
     }
 
+    /**
+     * getEmailTemplateUserContent
+     * @param params
+     * @return
+     */
     static String getEmailTemplateUserContent(Map<String, String> params) {
         String emptyString = "";
         String websiteName = params.getOrDefault("websiteName", emptyString);

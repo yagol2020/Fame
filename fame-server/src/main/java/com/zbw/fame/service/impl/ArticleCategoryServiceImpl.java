@@ -107,7 +107,7 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
                 .stream()
                 .collect(Collectors.toMap(BaseBlogEntity::getId, o -> o));
 
-        Map<Integer, Category> map = new HashMap<>();
+        Map<Integer, Category> map = new HashMap<>(16);
         for (ArticleCategory o : articleCategories) {
             if (map.put(o.getArticleId(), categoryMap.get(o.getCategoryId())) != null) {
                 throw new IllegalStateException("Duplicate key");
