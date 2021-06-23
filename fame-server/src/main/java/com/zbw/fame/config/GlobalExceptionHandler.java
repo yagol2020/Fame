@@ -79,7 +79,7 @@ public class GlobalExceptionHandler {
      * @return {@link RestResponse}
      */
     @ExceptionHandler(value = NotFoundException.class)
-    public RestResponse<RestResponse.Empty> NotFoundErrorHandler(HttpServletRequest req, NotFoundException e) {
+    public RestResponse<RestResponse.Empty> notFoundErrorHandler(HttpServletRequest req, NotFoundException e) {
         String message = "";
         if (null != e.getClz()) {
             message = e.getClz().getSimpleName();
@@ -96,7 +96,7 @@ public class GlobalExceptionHandler {
      * @return {@link RestResponse}
      */
     @ExceptionHandler(value = NotLoginException.class)
-    public RestResponse<RestResponse.Empty> NotLoginErrorHandler(HttpServletRequest req, HttpServletResponse rep, NotLoginException e) {
+    public RestResponse<RestResponse.Empty> notLoginErrorHandler(HttpServletRequest req, HttpServletResponse rep, NotLoginException e) {
         return RestResponse.fail(ErrorCode.NOT_LOGIN.getCode(), ErrorCode.NOT_LOGIN.getMsg());
     }
 
