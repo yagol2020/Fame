@@ -1,7 +1,3 @@
-<p align="center">
-  <img align="center" src="https://raw.githubusercontent.com/zzzzbw/blog_source/master/images/FameDocker/fame-logo-small.png"/>
-</p>
+# [原仓库地址](https://github.com/zzzzbw/Fame)
 
-<p align="center">
-放标签
-</p>
+# [yagol.xyz](www.yagol.xyz)
