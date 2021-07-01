@@ -137,7 +137,7 @@ public class InitApplicationRunner implements ApplicationRunner {
                 "    System.out.println(\"Hello Fame\");\n" +
                 "}\n" +
                 "```\n" +
-                "> 想要了解更多详细信息，可以查看[文档](https://github.com/zzzzbw/Fame/blob/master/README.md)。");
+                "> 想要了解更多详细信息，可以查看[文档](https://github.com/zzzzbw/Fame/blob/master/README.md)");
         article.setHeaderShow(false);
         article.setListShow(true);
         article.setStatus(ArticleStatus.PUBLISH);
