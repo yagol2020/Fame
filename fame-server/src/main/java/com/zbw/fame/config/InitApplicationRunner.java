@@ -1,5 +1,6 @@
 package com.zbw.fame.config;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.zbw.fame.config.init.InitArticle;
 import com.zbw.fame.model.entity.*;
@@ -54,7 +55,10 @@ public class InitApplicationRunner implements ApplicationRunner {
 
     private static final String DEFAULT_TAG = "First";
 
-    private static final String DEFAULT_CATEGORY = "New";
+    private static final String DEFAULT_CATEGORY_NEW = "New";
+
+    private static final String[] DEFAULT_CATEGORY_YAGOL = {"LeetCode", "Idea", "WebSite", "Other"};
+
 
     /**
      * 用于初始化访问的链接
@@ -100,6 +104,7 @@ public class InitApplicationRunner implements ApplicationRunner {
         User user = createDefaultUserIfAbsent();
         Article article = createDefaultArticleIfAbsent(user);
         createDefaultCategoryIfAbsent(article);
+        createDefaultYagolArticleIfAbsent(user);
         createDefaultTagIfAbsent(article);
         createDefaultCommentIfAbsent(article);
         createDefaultHeaderArticleIfAbsent(user);
@@ -123,7 +128,7 @@ public class InitApplicationRunner implements ApplicationRunner {
         return user;
     }
 
-    private Article createDefaultArticleIfAbsent(User user) throws IOException {
+    private Article createDefaultArticleIfAbsent(User user) {
         log.info("Create default post...");
         long count = articleService.count(Wrappers.<Article>lambdaQuery().eq(Article::isHeaderShow, false));
         if (null == user || count > 0) {
@@ -143,9 +148,21 @@ public class InitApplicationRunner implements ApplicationRunner {
         article.setStatus(ArticleStatus.PUBLISH);
         article.setAuthorId(user.getId());
         articleService.save(article);
-        List<Article> initArticles = initArticle.initArticle(user);
-        initArticles.forEach(articleService::save);
         return article;
+    }
+
+    private void createDefaultYagolArticleIfAbsent(User user) throws IOException {
+        List<Article> initArticles = initArticle.initArticle(user);
+        initArticles.forEach(article -> {
+            articleService.save(article);
+            ArticleCategory articleCategory = new ArticleCategory();
+            articleCategory.setArticleId(article.getId());
+            articleCategory.setCategoryId(categoryService.getOne(new QueryWrapper<Category>()
+                    .eq("NAME", article.getCategoryTemp()))
+                    .getId());
+            articleCategoryService.save(articleCategory);
+        });
+
     }
 
     private void createDefaultCategoryIfAbsent(Article article) {
@@ -156,14 +173,18 @@ public class InitApplicationRunner implements ApplicationRunner {
         }
 
         Category category = new Category();
-        category.setName(DEFAULT_CATEGORY);
+        category.setName(DEFAULT_CATEGORY_NEW);
         categoryService.save(category);
 
         ArticleCategory articleCategory = new ArticleCategory();
         articleCategory.setArticleId(article.getId());
         articleCategory.setCategoryId(category.getId());
-
         articleCategoryService.save(articleCategory);
+        for (String categoryToBeSave : DEFAULT_CATEGORY_YAGOL) {
+            category = new Category();
+            category.setName(categoryToBeSave);
+            categoryService.save(category);
+        }
     }
 
     private void createDefaultTagIfAbsent(Article article) {
