@@ -62,4 +62,6 @@ public class Article extends BaseBlogEntity {
      * 是否允许评论
      */
     private Boolean allowComment = true;
+
+    private String categoryTemp = "";
 }
