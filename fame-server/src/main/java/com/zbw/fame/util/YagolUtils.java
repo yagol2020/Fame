@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.UUID;
 
 /**
  * @author yagol
@@ -23,12 +24,25 @@ public class YagolUtils {
         return headerValues;
     }
 
+    /**
+     * 读取指定File到String
+     * @param toBeReadFile 被读取的文件File
+     * @return 文件内容字符串
+     * @throws IOException 文件读取异常
+     */
     public static String readFile2Str(File toBeReadFile) throws IOException {
         byte[] bytes = new byte[(int) toBeReadFile.length()];
         FileInputStream fileInputStream = new FileInputStream(toBeReadFile);
         int ret = fileInputStream.read(bytes);
-        String content = new String(bytes, 0, ret);
-        return content;
+        return new String(bytes, 0, ret);
+    }
+
+    /**
+     * 得到UUID字符串
+     * @return
+     */
+    public static String getUuidStr(){
+        return UUID.randomUUID().toString();
     }
 
 }
